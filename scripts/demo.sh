@@ -44,3 +44,6 @@ echo
 echo "All local demos finished. No testnet calls were made."
 echo "To drive the vault yourself, see README.md ('Do X → see Y')."
 echo "To deploy to NEAR testnet (optional), see scripts/testnet.sh."
+
+echo "Next: the purchasing agent  (./scripts/agent.sh --offline)"
+echo "      and the web console   (./scripts/ui.sh  → http://127.0.0.1:8787)"
