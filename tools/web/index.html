@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SpendGuard — agent wallet policy</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="frame">
+    <header class="top">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">▣</span>
+        <div>
+          <h1>SpendGuard</h1>
+          <p class="tag">On-chain spending limits for AI agent wallets on NEAR</p>
+        </div>
+      </div>
+      <div class="badges">
+        <span class="badge">tracks · agents + security</span>
+        <span class="badge live" id="mode-badge">local mock</span>
+      </div>
+    </header>
+
+    <section class="vault-bar" id="vault-bar">
+      <div>
+        <span class="k">Vault</span>
+        <strong id="bal">10 NEAR</strong>
+        <span class="sub" id="avail">9.95 available</span>
+      </div>
+      <div>
+        <span class="k">Daily</span>
+        <strong id="daily">0 / 2 NEAR</strong>
+        <div class="meter" aria-hidden="true"><i id="daily-meter" style="width:0%"></i></div>
+      </div>
+      <div>
+        <span class="k">Per-tx cap</span>
+        <strong id="pertx">1 NEAR</strong>
+      </div>
+      <div>
+        <span class="k">Agent</span>
+        <strong id="agent-name" class="mono">agent.testnet</strong>
+        <span class="sub" id="paused-flag"></span>
+      </div>
+    </section>
+
+    <main class="grid">
+      <section class="card" id="policy-card">
+        <h2>1 · Human sets the policy</h2>
+        <p class="lede">The agent never sees a full-access key. These limits live in the vault, not in the prompt.</p>
+        <form id="policy-form">
+          <div class="row">
+            <label>Per-tx max (NEAR)
+              <input name="per_tx" type="text" value="1" autocomplete="off" />
+            </label>
+            <label>Daily max (NEAR)
+              <input name="daily" type="text" value="2" autocomplete="off" />
+            </label>
+          </div>
+          <label>Receivers allowlist <span class="hint">comma-separated; empty is deny-all</span>
+            <input name="receivers" type="text" value="merchant.testnet" autocomplete="off" />
+          </label>
+          <label>Methods allowlist <span class="hint">for function calls</span>
+            <input name="methods" type="text" value="api_charge" autocomplete="off" />
+          </label>
+          <div class="actions">
+            <button type="submit" class="btn primary">Save policy</button>
+            <button type="button" class="btn" id="btn-pause">Pause agent</button>
+            <button type="button" class="btn ghost" id="btn-reset">Reset vault</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" id="agent-card">
+        <h2>2 · Agent tries to spend</h2>
+        <p class="lede">The agent proposes a payment. SpendGuard simulates, then accepts or rejects. A reject leaves the vault unchanged.</p>
+        <label>Task for the agent
+          <textarea id="task" rows="5">Buy today's market-data API from merchant.testnet. The listed price is 0.4 NEAR. Pay them and stop.</textarea>
+        </label>
+        <div class="actions">
+          <button type="button" class="btn primary" id="btn-agent">Run agent</button>
+          <button type="button" class="btn danger" id="btn-attack">Inject drain prompt</button>
+          <button type="button" class="btn gold" id="btn-demo">Play full demo</button>
+        </div>
+        <p class="hint" id="agent-hint">Uses a deterministic offline fallback unless an OpenAI-compatible API key is set on the server.</p>
+      </section>
+    </main>
+
+    <section class="card log-card" id="log-card">
+      <div class="log-head">
+        <h2>3 · Approve / reject log</h2>
+        <p class="lede">Screenshot this panel after “Play full demo”: a legitimate 0.4 NEAR purchase is approved, a 10 NEAR payment to a stranger is rejected.</p>
+      </div>
+      <ol class="log" id="log"></ol>
+    </section>
+
+    <footer>
+      <p>Local mock of the SpendGuard policy engine — the same rules as the NEAR contract.
+         Testnet only for on-chain deploys. MIT license.
+         <a href="https://github.com/arya161100/spendguard-agent">github.com/arya161100/spendguard-agent</a>
+      </p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
