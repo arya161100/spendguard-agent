@@ -24,3 +24,11 @@ neardev/
 *.swo
 .idea/
 .vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local UI / agent state
+tools/agent/.spendguard-*.json
