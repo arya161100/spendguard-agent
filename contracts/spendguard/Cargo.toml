@@ -1,0 +1,20 @@
+[package]
+name = "spendguard"
+version.workspace = true
+edition.workspace = true
+rust-version = "1.93"
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+description = "SpendGuard vault: an on-chain spending-policy contract for AI agent wallets on NEAR."
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = "=5.24.1"
+spendguard-policy = { path = "../../crates/spendguard-policy" }
+
+[dev-dependencies]
+near-sdk = { version = "=5.24.1", features = ["unit-testing"] }
+

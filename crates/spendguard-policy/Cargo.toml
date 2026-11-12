@@ -1,0 +1,16 @@
+[package]
+name = "spendguard-policy"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+description = "Pure policy engine for SpendGuard (no NEAR SDK). Shared by the contract, the CLI, and unit tests."
+
+[dependencies]
+serde = { version = "1", features = ["derive"], optional = true }
+
+[features]
+default = ["serde"]
+serde = ["dep:serde"]

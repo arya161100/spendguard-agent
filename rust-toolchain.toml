@@ -1,0 +1,4 @@
+# Judges and CI: use a recent stable (contract rust-version is 1.93+).
+[toolchain]
+channel = "stable"
+targets = ["wasm32-unknown-unknown"]

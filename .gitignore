@@ -1,0 +1,26 @@
+# Build
+/target
+**/*.wasm
+!# keep source only; wasm is produced locally
+
+# Local demo state (never a secret, but session-specific)
+.spendguard-local.json
+.spendguard-local-*.json
+
+# Credentials and env — never commit keys
+.env
+.env.*
+!.env.example
+*.pem
+*.json.key
+credentials/
+.near-credentials/
+neardev/
+.near-config/
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
